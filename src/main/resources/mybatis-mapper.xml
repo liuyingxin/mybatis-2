@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="customer">
+    <select id="selectAll" resultType="com.xin.entity.Customer">
+        select * from customers
+    </select>
+    <select id="selectById" resultType="com.xin.entity.Customer">
+        select id,
+               name,
+               gender,
+               birthday,
+               phonenumber,
+               email,
+               description
+            from customers
+        <where>
+            and id = #{id}
+        </where>
+    </select>
+    <!--insert可以使用数据库支持的自动生成主键策略，设置useGeneratedKeys=”true”，然后把keyProperty 设成对应的列，就搞定了。-->
+    <insert id="insertCustomer" useGeneratedKeys="true" parameterType="com.xin.entity.Customer">
+        insert into customers (id,name,gender,birthday,phonenumber,email,description)values(#{id},#{name},#{gender},#{birthday},#{phonenumber},#{email},#{description})
+    </insert>
+
+    <update id="updateCustomers" >
+        update customers
+        set name=#{name},
+        gender=#{gender},
+        birthday=#{birthday},
+        phonenumber=#{phonenumber},
+        email=#{email},
+        description=#{description}
+        where id =#{id};
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from customers where id = #{id}
+    </delete>
+</mapper>
