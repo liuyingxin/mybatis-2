@@ -24,9 +24,9 @@ public class TestCRUD {
        System.out.println(dao.findById(2));
     }
     @Test
-    public void save() {
-        Customer c = new Customer("小可爱","女",new Date(), "18138245275","18273753@qqn.com","php");
-        dao.save(c);
+    public void insert() {
+        Customer c = new Customer("望望","女",new Date(), "18138245275","18273753@qqn.com","php");
+        dao.insert(c);
     }
     @Test
     public void delete(){

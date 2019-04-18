@@ -13,14 +13,16 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
- *增删改查方法实现
+ * 增删改查方法实现
+ *
  * @author ly
  */
-public class CustomerDaoImpl implements CustomerDao  {
-    String resource = "mybatis-config.xml";
-    InputStream  inputStream;
+public class CustomerDaoImpl implements CustomerDao {
 
+        String resource = "mybatis-config.xml";
+        InputStream inputStream;
     {
         try {
             inputStream = Resources.getResourceAsStream(resource);
@@ -29,39 +31,42 @@ public class CustomerDaoImpl implements CustomerDao  {
         }
     }
     SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    SqlSession session = sqlSessionFactory.openSession();
 
     @Override
-    public List<Customer> findAll()  {
-
+    public List<Customer> findAll() {
+        SqlSession session = sqlSessionFactory.openSession();
         List<Customer> customers = session.selectList("selectAll");
         return customers;
     }
 
     @Override
-    public void save(Customer c) {
-    session.update("insertCustomer",c);
-    session.commit();
-    session.close();
+    public void insert(Customer c) {
+        SqlSession session = sqlSessionFactory.openSession();
+        session.update("insertCustomer", c);
+        session.commit();
+        session.close();
     }
 
     @Override
     public Customer findById(Integer customerId) {
-       Customer customer =  session.selectOne("selectById",customerId);
+        SqlSession session = sqlSessionFactory.openSession();
+        Customer customer = session.selectOne("selectById", customerId);
         session.close();
-       return customer;
+        return customer;
     }
 
     @Override
     public void update(Customer c) {
-        session.update("updateCustomers",c);
+        SqlSession session = sqlSessionFactory.openSession();
+        session.update("updateCustomers", c);
         session.commit();
         session.close();
     }
 
     @Override
     public void delete(Integer customerId) {
-        session.delete("deleteById",customerId);
+        SqlSession session = sqlSessionFactory.openSession();
+        session.delete("deleteById", customerId);
         session.commit();
         session.close();
     }

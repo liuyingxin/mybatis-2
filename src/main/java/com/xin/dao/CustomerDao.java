@@ -19,12 +19,10 @@ public interface CustomerDao {
     List<Customer> findAll() ;
 
     /**
-     * 保存用户
+     * 新增用户
      * @param c 用户信息
      */
-    void save(Customer c);
-
-
+    void insert(Customer c);
     /**
      * 按照id查询用户
      * @param customerId 用户id
@@ -32,13 +30,11 @@ public interface CustomerDao {
      */
     Customer findById(Integer customerId);
 
-
     /**
      * 修改用户信息
      * @param c 用户信息
      */
     void update(Customer c);
-
 
     /**
      *按照用户id删除用户
